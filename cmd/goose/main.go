@@ -17,7 +17,6 @@ import (
 	"text/template"
 
 	"github.com/joho/godotenv"
-	"github.com/mfridman/xflag"
 	"github.com/pressly/goose/v3"
 	"github.com/pressly/goose/v3/internal/migrationstats"
 )
@@ -29,10 +28,7 @@ func main() {
 
 	flags.Usage = usage
 
-	if err := xflag.ParseToEnd(flags, os.Args[1:]); err != nil {
-		log.Fatalf("failed to parse args: %v", err)
-		return
-	}
+	flags.Parse(os.Args[2:])
 
 	if *versionFlag {
 		buildInfo, ok := debug.ReadBuildInfo()
